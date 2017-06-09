@@ -50,10 +50,34 @@ namespace BashSoft
                     break;
                 case "downloadAsynch":
                     break;
+                case "show":
+                    TryShowWantedData(input, data);
+                    break;
                 default:
                     DisplayInvalidCommandMessage(input);
                     break;
             }
+        }
+
+        private static void TryShowWantedData(string input, string[] data)
+        {
+            if (data.Length == 2)
+            {
+                var course = data[1];
+                StudentsRepository.GetAllStudentsFromCourse(course);
+            }
+            else if (data.Length == 3)
+            {
+                var course = data[1];
+                var username = data[2];
+                StudentsRepository.GetStudentScoresFromCourse(course, username);
+            }
+            else
+            {
+                DisplayInvalidCommandMessage(input);
+            }
+
+            return;
         }
 
         private static void TryGetHelp(string input, string[] data)

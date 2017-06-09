@@ -82,7 +82,7 @@ namespace BashSoft
             {
                 string currenPath = SessionData.currentPath;
                 currenPath += "\\" + relativePath;
-                ChangeCurrentDirectoryRelative(currenPath);
+                SessionData.currentPath = currenPath;
             }
         }
 
