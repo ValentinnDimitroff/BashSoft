@@ -18,7 +18,9 @@ namespace BashSoft
             //IOManager.CreateDirectoryInCurrentFolder("pesho");
             //IOManager.TraverseDirectory(2);
             
-            IOManager.ChangeCurrentDirectoryRelative("..");
+            //IOManager.ChangeCurrentDirectoryRelative("..");
+
+            InputReader.StartReadingCommands();
         }
     }
 }
