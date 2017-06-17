@@ -29,5 +29,13 @@ namespace BashSoft
         public static string UnableToGoHigherInParitionHierarchy = "Unable to go higher in partition hierarchy.";
 
         public static string UnableToParseNumber = "The sequence you've written is not a valid number.";
+
+        public static string InvalidStudentFilter =
+            "The given filter is not one of the following: excellent/average/poor";
+
+        public static string InvalidQueryComparison =
+            "The comparison query you want, does not exist in the context of the current program!";
+
+        public static string InvalidTakeQueryParamter = "The take command expected does not match the format wanted!";
     }
 }
