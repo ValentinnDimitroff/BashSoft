@@ -48,5 +48,19 @@ namespace BashSoft
                 }
             }
         }
+
+        //private static double Average(List<int> scoresOnTasks)
+        //{
+        //    int totalScore = 0;
+        //    foreach (var score in scoresOnTasks)
+        //    {
+        //        totalScore += score;
+        //    }
+
+        //    var percentageOfAll = totalScore / (scoresOnTasks.Count * 100);
+        //    var mark = percentageOfAll * 4 + 2;
+
+        //    return mark;
+        //}
     }
 }
