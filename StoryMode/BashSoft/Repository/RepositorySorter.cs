@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
-    class RepositorySorters
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class RepositorySorter
     {
-        public static void OrderAndTake(Dictionary<string, List<int>> wantedData, string comparison, int studentsToTake)
+        public void OrderAndTake(Dictionary<string, double> studentsWithMark, string comparison, int studentsToTake)
         {
             comparison = comparison.ToLower();
             if (comparison == "ascending")
             {
-                PrintStudents(wantedData
-                    .OrderBy(x => x.Value.Sum())
+                this.PrintStudents(studentsWithMark
+                    .OrderBy(x => x.Value)
                     .Take(studentsToTake)
                     .ToDictionary(x => x.Key, x => x.Value));
             }
             else if(comparison == "descending")
             {
-                PrintStudents(wantedData
-                    .OrderByDescending(x => x.Value.Sum())
+                this.PrintStudents(studentsWithMark
+                    .OrderByDescending(x => x.Value)
                     .Take(studentsToTake)
                     .ToDictionary(x => x.Key, x => x.Value));
             }
@@ -31,7 +28,7 @@ namespace BashSoft
             }
         }
 
-        public static void PrintStudents(Dictionary<string, List<int>> studentsSorted)
+        public void PrintStudents(Dictionary<string, double> studentsSorted)
         {
             foreach (var kv in studentsSorted)
             {
