@@ -1,6 +1,9 @@
 ﻿namespace BashSoft
 {
+    using System;
     using System.Diagnostics;
+    using System.IO;
+
     public class CommandInterpreter
     {
         private Tester judge;
@@ -18,6 +21,32 @@
         {
             string[] data = input.Split();
             string command = data[0];
+
+            try
+            {
+                this.ParseCommand(input, command, data);
+            }
+            catch (DirectoryNotFoundException dnf)
+            {
+                OutputWriter.DisplayException(dnf.Message);
+            }
+            catch (ArgumentOutOfRangeException aef)
+            {
+                OutputWriter.DisplayException(aef.Message);
+            }
+            catch (ArgumentException ae)
+            {
+                OutputWriter.DisplayException(ae.Message);
+            }
+            catch (Exception e)
+            {
+                OutputWriter.DisplayException(e.Message);
+            }
+
+        }
+
+        private void ParseCommand(string input, string command, string[] data)
+        {
             switch (command)
             {
                 case "open":
@@ -67,7 +96,6 @@
                     break;
             }
         }
-
         private void TryDropDb(string input, string[] data)
         {
             if (!IsDataValid(data, 1))

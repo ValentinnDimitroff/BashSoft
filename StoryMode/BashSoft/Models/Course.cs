@@ -5,11 +5,30 @@
 
     public class Course
     {
-        public string name;
-        public Dictionary<string, Student> studentsByName;
+        private string name;
+        private Dictionary<string, Student> studentsByName;
 
         public const int NumberOfTasksOnExam = 5;
         public const int MaxScoreOnExamTask = 5;
+
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException(nameof(this.name), ExceptionMessages.NullOrEmptyValue);
+                }
+                this.name = value;
+            }
+        }
+
+        public IReadOnlyDictionary<string, Student> StudentsByName
+        {
+            get { return this.studentsByName; }
+        }
+
 
         public Course(string name)
         {
@@ -19,13 +38,12 @@
 
         public void EnrollStudent(Student student)
         {
-            if (this.studentsByName.ContainsKey(student.userName))
+            if (this.studentsByName.ContainsKey(student.Username))
             {
-                OutputWriter.DisplayException(string.Format(ExceptionMessages.StudentAlreadyEnrolledInGivenCourse, student.userName, this.name));
-                return;
+                throw new ArgumentException(string.Format(ExceptionMessages.StudentAlreadyEnrolledInGivenCourse, student.Username, this.name));
             }
 
-            this.studentsByName.Add(student.userName, student);
+            this.studentsByName.Add(student.Username, student);
         }
     }
 }

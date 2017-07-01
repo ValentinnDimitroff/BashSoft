@@ -1,5 +1,6 @@
 ﻿namespace BashSoft
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -24,7 +25,7 @@
             }
             else
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidQueryComparison);
+                throw new ArgumentOutOfRangeException(ExceptionMessages.InvalidQueryComparison);
             }
         }
 

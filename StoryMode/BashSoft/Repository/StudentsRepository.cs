@@ -30,11 +30,11 @@
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = this.courses[courseName].studentsByName.Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
 
-                var marks = this.courses[courseName].studentsByName
-                    .ToDictionary(x => x.Key, x => x.Value.marksByCourseName[courseName]);
+                var marks = this.courses[courseName].StudentsByName
+                    .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.filter.FilterAndTake(marks, givenFilter, studentsToTake.Value);
             }
         }
@@ -45,11 +45,11 @@
             {
                 if (studentsToTake == null)
                 {
-                    studentsToTake = this.courses[courseName].studentsByName.Count;
+                    studentsToTake = this.courses[courseName].StudentsByName.Count;
                 }
 
-                var marks = this.courses[courseName].studentsByName
-                    .ToDictionary(x => x.Key, x => x.Value.marksByCourseName[courseName]);
+                var marks = this.courses[courseName].StudentsByName
+                    .ToDictionary(x => x.Key, x => x.Value.MarksByCourseName[courseName]);
                 this.sorter.OrderAndTake(marks, comparison, studentsToTake.Value);
             }
         }
@@ -58,8 +58,7 @@
         {
             if (this.isDataInilized)
             {
-                OutputWriter.DisplayException(ExceptionMessages.DataAlreadyInitialisedException);
-                return;
+                throw new ArgumentException(ExceptionMessages.DataAlreadyInitialisedException);
             }
             
             this.courses = new Dictionary<string, Course>();
@@ -72,8 +71,7 @@
         {
             if (!this.isDataInilized)
             {
-                OutputWriter.DisplayException(ExceptionMessages.DataNotInitializedExceptionMessage);
-                return;
+                throw new ArgumentException(ExceptionMessages.DataNotInitializedExceptionMessage);
             }
 
             this.courses = null;
@@ -106,11 +104,13 @@
                             if (scores.Any(s => s > 100 && s < 0))
                             {
                                 OutputWriter.DisplayException(ExceptionMessages.InvalidScore);
+                                continue;
                             }
 
                             if (scores.Length > Course.NumberOfTasksOnExam)
                             {
                                 OutputWriter.DisplayException(ExceptionMessages.InvalidNumberOfScores);
+                                continue;
                             }
 
                             if (!this.students.ContainsKey(username))
@@ -140,8 +140,7 @@
             }
             else
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidPath);
-                return;
+                throw new ArgumentException(ExceptionMessages.InvalidPath);
             }
 
             isDataInilized = true;
@@ -171,7 +170,7 @@
 
         private bool IsQueryForStudentPossible(string courseName, string studentUserName)
         {
-            if (this.IsQueryForCoursePossible(courseName) && this.courses[courseName].studentsByName.ContainsKey(studentUserName))
+            if (this.IsQueryForCoursePossible(courseName) && this.courses[courseName].StudentsByName.ContainsKey(studentUserName))
             {
                 return true;
             }
@@ -186,7 +185,7 @@
         public void GetStudentScoresFromCourse(string courseName, string username)
         {
             OutputWriter.PrintStudent(
-                new KeyValuePair<string, double>(username, this.courses[courseName].studentsByName[username].marksByCourseName[courseName]));
+                new KeyValuePair<string, double>(username, this.courses[courseName].StudentsByName[username].MarksByCourseName[courseName]));
         }
 
         public void GetAllStudentsFromCourse(string courseName)
@@ -194,7 +193,7 @@
             if (IsQueryForCoursePossible(courseName))
             {
                 OutputWriter.WriteMessageOnNewLine($"{courseName}");
-                foreach (var studetMarksEntry in this.courses[courseName].studentsByName)
+                foreach (var studetMarksEntry in this.courses[courseName].StudentsByName)
                 {
                     this.GetStudentScoresFromCourse(courseName, studetMarksEntry.Key);
                 }

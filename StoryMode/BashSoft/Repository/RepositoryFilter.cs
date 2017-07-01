@@ -22,7 +22,7 @@
             }
             else
             {
-                OutputWriter.WriteMessageOnNewLine(ExceptionMessages.InvalidStudentFilter);
+                throw new ArgumentException(ExceptionMessages.InvalidStudentFilter);
             }
         }
 
