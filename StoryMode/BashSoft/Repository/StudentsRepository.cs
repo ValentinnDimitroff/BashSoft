@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using Execptions;
     using Models;
 
     public class StudentsRepository
@@ -140,7 +141,7 @@
             }
             else
             {
-                throw new ArgumentException(ExceptionMessages.InvalidPath);
+                throw new InvalidPathException();
             }
 
             isDataInilized = true;

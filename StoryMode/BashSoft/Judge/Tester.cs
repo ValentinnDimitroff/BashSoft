@@ -2,6 +2,8 @@
 {
     using System;
     using System.IO;
+    using Execptions;
+
     public class Tester
     {
         private string GetMismatchPath(string expectedOutputPath)
@@ -32,7 +34,7 @@
             }
             catch (IOException)
             {
-                throw new IOException(ExceptionMessages.InvalidPath);
+                throw new InvalidPathException();
             }
         }
 
