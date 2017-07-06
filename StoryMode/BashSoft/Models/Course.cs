@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Execptions;
 
     public class Course
     {
@@ -18,7 +19,7 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException(nameof(this.name), ExceptionMessages.NullOrEmptyValue);
+                    throw new InvalidStringException();
                 }
                 this.name = value;
             }
@@ -40,7 +41,7 @@
         {
             if (this.studentsByName.ContainsKey(student.Username))
             {
-                throw new ArgumentException(string.Format(ExceptionMessages.StudentAlreadyEnrolledInGivenCourse, student.Username, this.name));
+                throw new DuplicateEntryInStructureException(student.Username, this.name);
             }
 
             this.studentsByName.Add(student.Username, student);

@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using Exceptions;
+    using Execptions;
 
     public class IOManager
     {
@@ -55,7 +57,7 @@
             }
             catch (ArgumentException)
             {
-                throw new ArgumentException(ExceptionMessages.ForbiddenSymbolsContainedInName);
+                throw new InvalidFileNameException();
             }
         }
 
@@ -72,7 +74,7 @@
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    throw new ArgumentOutOfRangeException(ExceptionMessages.UnableToGoHigherInParitionHierarchy);
+                    throw new InvalidPathException();
                 }
             }
             else
@@ -87,7 +89,7 @@
         {
             if (!Directory.Exists(absolutePath))
             {
-                throw new DirectoryNotFoundException(ExceptionMessages.InvalidPath);
+                throw new InvalidPathException();
             }
 
             SessionData.currentPath = absolutePath;
