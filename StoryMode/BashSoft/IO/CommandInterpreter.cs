@@ -1,8 +1,6 @@
 ﻿namespace BashSoft
 {
     using System;
-    using System.Diagnostics;
-    using System.IO;
     using Execptions;
     using IO.Commands;
 
@@ -61,14 +59,14 @@
                     return new OrderAndTakeCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 case "dropdb":
                     return new DropDbCommand(input, data, this.judge, this.repository, this.inputOutputManager);
+                case "show":
+                    return new ShowWantedDataCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 //case "decOrder":
                 //    break;
                 //case "download":
                 //    break;
                 //case "downloadAsynch":
                 //    break;
-                case "show":
-                    return new ShowWantedDataCommand(input, data, this.judge, this.repository, this.inputOutputManager);
                 default:
                     throw new InvalidCommandException(input);
             }

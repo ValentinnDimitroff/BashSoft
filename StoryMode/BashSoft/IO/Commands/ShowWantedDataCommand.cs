@@ -9,7 +9,7 @@
 
         public override void Execute()
         {
-            if (this.Data.Length != 2)
+            if (this.Data.Length == 2)
             {
                 var course = this.Data[1];
                 this.Repository.GetAllStudentsFromCourse(course);
