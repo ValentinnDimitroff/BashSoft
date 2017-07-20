@@ -3,9 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Contracts;
     using Execptions;
 
-    public class Student
+    public class SoftUniStudent : Student
     {
         private string username;
         private Dictionary<string, Course> enrolledCourses;
@@ -33,7 +34,8 @@
         {
             get { return this.marksByCourseName; }
         }
-        public Student(string userName)
+
+        public SoftUniStudent(string userName)
         {
             this.Username = userName;
             this.enrolledCourses = new Dictionary<string, Course>();
@@ -57,7 +59,7 @@
                 throw new CourseNotFoundException();
             }
 
-            if (scores.Length > Course.NumberOfTasksOnExam)
+            if (scores.Length > SoftUniCourse.NumberOfTasksOnExam)
             {
                 throw new ArgumentOutOfRangeException(ExceptionMessages.InvalidNumberOfScores);
             }
@@ -68,7 +70,7 @@
         private double CalculateMark(int[] scores)
         {
             var percentageOfSolvedExam = scores.Sum() /
-                (double)(Course.NumberOfTasksOnExam * Course.MaxScoreOnExamTask);
+                (double)(SoftUniCourse.NumberOfTasksOnExam * SoftUniCourse.MaxScoreOnExamTask);
             var mark = percentageOfSolvedExam * 4 + 2;
 
             return mark;

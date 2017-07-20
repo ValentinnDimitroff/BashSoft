@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using Contracts;
 
-    public class RepositoryFilter
+    public class RepositoryFilter : IDataFilter
     {
         public void FilterAndTake(Dictionary<string, double> studentsWithMarks, string wantedFilters, int studentsToTake)
         {
@@ -40,19 +41,5 @@
                 }
             }
         }
-
-        //private static double Average(List<int> scoresOnTasks)
-        //{
-        //    int totalScore = 0;
-        //    foreach (var score in scoresOnTasks)
-        //    {
-        //        totalScore += score;
-        //    }
-
-        //    var percentageOfAll = totalScore / (scoresOnTasks.Count * 100);
-        //    var mark = percentageOfAll * 4 + 2;
-
-        //    return mark;
-        //}
     }
 }

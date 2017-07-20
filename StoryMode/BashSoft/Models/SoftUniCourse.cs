@@ -1,15 +1,22 @@
 ﻿namespace BashSoft.Models
 {
     using System.Collections.Generic;
+    using Contracts;
     using Execptions;
 
-    public class Course
+    public class SoftUniCourse : Course
     {
+        public const int NumberOfTasksOnExam = 5;
+        public const int MaxScoreOnExamTask = 100;
+
         private string name;
         private Dictionary<string, Student> studentsByName;
 
-        public const int NumberOfTasksOnExam = 5;
-        public const int MaxScoreOnExamTask = 5;
+        public SoftUniCourse(string name)
+        {
+            this.name = name;
+            this.studentsByName = new Dictionary<string, Student>();
+        }
 
         public string Name
         {
@@ -28,14 +35,7 @@
         {
             get { return this.studentsByName; }
         }
-
-
-        public Course(string name)
-        {
-            this.name = name;
-            this.studentsByName = new Dictionary<string, Student>();
-        }
-
+        
         public void EnrollStudent(Student student)
         {
             if (this.studentsByName.ContainsKey(student.Username))
