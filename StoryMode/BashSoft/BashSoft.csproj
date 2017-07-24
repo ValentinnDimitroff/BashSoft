@@ -50,7 +50,7 @@
     <Compile Include="Contracts\Database\IRequester.cs" />
     <Compile Include="Contracts\IDataFilter.cs" />
     <Compile Include="Contracts\IDataSorter.cs" />
-    <Compile Include="Contracts\Models\Course.cs" />
+    <Compile Include="Contracts\Models\ICourse.cs" />
     <Compile Include="Contracts\IContentComparer.cs" />
     <Compile Include="Contracts\DirectoryManarager\IDirectoryChanger.cs" />
     <Compile Include="Contracts\DirectoryManarager\IDirectoryCreator.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Contracts\IExecutable.cs" />
     <Compile Include="Contracts\IInterpreter.cs" />
     <Compile Include="Contracts\IReader.cs" />
-    <Compile Include="Contracts\Models\Student.cs" />
+    <Compile Include="Contracts\Models\IStudent.cs" />
     <Compile Include="Execptions\DuplicateEntryInStructureException.cs" />
     <Compile Include="Execptions\InvalidCommandException.cs" />
     <Compile Include="Execptions\InvalidFileNameException.cs" />

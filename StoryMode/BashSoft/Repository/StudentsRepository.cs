@@ -12,15 +12,17 @@
     public class StudentsRepository : IDatabase
     {
         private bool isDataInilized;
-        private Dictionary<string, Course> courses;
-        private Dictionary<string, Student> students;
+
+        private Dictionary<string, ICourse> courses;
+        private Dictionary<string, IStudent> students;
+
         private RepositoryFilter filter;
         private IDataSorter sorter;
 
         public StudentsRepository(RepositoryFilter filter, IDataSorter sorter)
         {
-            this.courses = new Dictionary<string, Course>();
-            this.students = new Dictionary<string, Student>();
+            this.courses = new Dictionary<string, ICourse>();
+            this.students = new Dictionary<string, IStudent>();
             this.filter = filter;
             this.sorter = sorter;
             this.isDataInilized = false;
@@ -63,8 +65,8 @@
                 throw new ArgumentException(ExceptionMessages.DataAlreadyInitialisedException);
             }
             
-            this.courses = new Dictionary<string, Course>();
-            this.students = new Dictionary<string, Student>();
+            this.courses = new Dictionary<string, ICourse>();
+            this.students = new Dictionary<string, IStudent>();
             OutputWriter.WriteMessageOnNewLine("Reading data...");
             ReadData(fileName);
         }

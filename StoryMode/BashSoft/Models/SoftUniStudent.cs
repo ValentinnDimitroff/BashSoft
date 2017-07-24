@@ -6,10 +6,10 @@
     using Contracts;
     using Execptions;
 
-    public class SoftUniStudent : Student
+    public class SoftUniStudent : IStudent
     {
         private string username;
-        private Dictionary<string, Course> enrolledCourses;
+        private Dictionary<string, ICourse> enrolledCourses;
         private Dictionary<string, double> marksByCourseName;
 
         public string Username
@@ -25,7 +25,7 @@
             }
         }
 
-        public IReadOnlyDictionary<string, Course> EnrolledCourses
+        public IReadOnlyDictionary<string, ICourse> EnrolledCourses
         {
             get { return this.enrolledCourses; }
         }
@@ -38,11 +38,11 @@
         public SoftUniStudent(string userName)
         {
             this.Username = userName;
-            this.enrolledCourses = new Dictionary<string, Course>();
+            this.enrolledCourses = new Dictionary<string, ICourse>();
             this.marksByCourseName = new Dictionary<string, double>();
         }
 
-        public void EnrollInCourse(Course course)
+        public void EnrollInCourse(ICourse course)
         {
             if (enrolledCourses.ContainsKey(course.Name))
             {

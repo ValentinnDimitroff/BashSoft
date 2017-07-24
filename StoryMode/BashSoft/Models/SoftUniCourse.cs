@@ -4,18 +4,18 @@
     using Contracts;
     using Execptions;
 
-    public class SoftUniCourse : Course
+    public class SoftUniCourse : ICourse
     {
         public const int NumberOfTasksOnExam = 5;
         public const int MaxScoreOnExamTask = 100;
 
         private string name;
-        private Dictionary<string, Student> studentsByName;
+        private Dictionary<string, IStudent> studentsByName;
 
         public SoftUniCourse(string name)
         {
             this.name = name;
-            this.studentsByName = new Dictionary<string, Student>();
+            this.studentsByName = new Dictionary<string, IStudent>();
         }
 
         public string Name
@@ -31,12 +31,12 @@
             }
         }
 
-        public IReadOnlyDictionary<string, Student> StudentsByName
+        public IReadOnlyDictionary<string, IStudent> StudentsByName
         {
             get { return this.studentsByName; }
         }
         
-        public void EnrollStudent(Student student)
+        public void EnrollStudent(IStudent student)
         {
             if (this.studentsByName.ContainsKey(student.Username))
             {
