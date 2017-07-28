@@ -44,12 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IDatabase.cs" />
+    <Compile Include="Contracts\ISimpleOrderedBag.cs" />
+    <Compile Include="Contracts\Database\IDatabase.cs" />
     <Compile Include="Contracts\Database\IFilteredTaker.cs" />
     <Compile Include="Contracts\Database\IOrderedTaker.cs" />
     <Compile Include="Contracts\Database\IRequester.cs" />
-    <Compile Include="Contracts\IDataFilter.cs" />
-    <Compile Include="Contracts\IDataSorter.cs" />
+    <Compile Include="Contracts\Database\FilterAndSort\IDataFilter.cs" />
+    <Compile Include="Contracts\Database\FilterAndSort\IDataSorter.cs" />
     <Compile Include="Contracts\Models\ICourse.cs" />
     <Compile Include="Contracts\IContentComparer.cs" />
     <Compile Include="Contracts\DirectoryManarager\IDirectoryChanger.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Contracts\IInterpreter.cs" />
     <Compile Include="Contracts\IReader.cs" />
     <Compile Include="Contracts\Models\IStudent.cs" />
+    <Compile Include="DataStructures\SimpleSortedList.cs" />
     <Compile Include="Execptions\DuplicateEntryInStructureException.cs" />
     <Compile Include="Execptions\InvalidCommandException.cs" />
     <Compile Include="Execptions\InvalidFileNameException.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="IO\Commands\ChangePathRelativelyCommand.cs" />
     <Compile Include="IO\Commands\Command.cs" />
     <Compile Include="IO\Commands\CompareFilesCommand.cs" />
+    <Compile Include="IO\Commands\DisplayCommand.cs" />
     <Compile Include="IO\Commands\DropDbCommand.cs" />
     <Compile Include="IO\Commands\FilterAndTakeCommand.cs" />
     <Compile Include="IO\Commands\GetHelpCommand.cs" />

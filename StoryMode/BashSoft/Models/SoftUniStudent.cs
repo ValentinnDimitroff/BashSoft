@@ -70,10 +70,15 @@
         private double CalculateMark(int[] scores)
         {
             var percentageOfSolvedExam = scores.Sum() /
-                (double)(SoftUniCourse.NumberOfTasksOnExam * SoftUniCourse.MaxScoreOnExamTask);
+                                         (double) (SoftUniCourse.NumberOfTasksOnExam *
+                                                   SoftUniCourse.MaxScoreOnExamTask);
             var mark = percentageOfSolvedExam * 4 + 2;
 
             return mark;
         }
+
+        public int CompareTo(IStudent other) => this.Username.CompareTo(other.Username);
+
+        public override string ToString() => this.Username;
     }
 }
