@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AliasAttribute.cs" />
+    <Compile Include="Attributes\InjectAttribute.cs" />
     <Compile Include="Contracts\ISimpleOrderedBag.cs" />
     <Compile Include="Contracts\Database\IDatabase.cs" />
     <Compile Include="Contracts\Database\IFilteredTaker.cs" />

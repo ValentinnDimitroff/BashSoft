@@ -1,11 +1,16 @@
 ﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Attributes;
     using Contracts;
     using Execptions;
 
+    [Alias("cdAbs")]
     public class ChangePathAbsoluteCommand : Command, IExecutable
     {
-        public ChangePathAbsoluteCommand(string input, string[] data, IContentComparer judge, IDatabase repository, IDirectoryManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager) { }
+        [Inject]
+        private IDirectoryManager inputOutputManager;
+
+        public ChangePathAbsoluteCommand(string input, string[] data) : base(input, data) { }
 
         public override void Execute()
         {
@@ -15,7 +20,7 @@
             }
 
             var absPath = this.Data[1];
-            this.InputOutputManager.ChangeCurrentDirectoryAbsolute(absPath);
+            this.inputOutputManager.ChangeCurrentDirectoryAbsolute(absPath);
         }
     }
 }

@@ -1,11 +1,16 @@
 ﻿namespace BashSoft.IO.Commands
 {
+    using BashSoft.Attributes;
     using Contracts;
     using Execptions;
 
+    [Alias("order")]
     public class OrderAndTakeCommand : Command, IExecutable
     {
-        public OrderAndTakeCommand(string input, string[] data, IContentComparer judge, IDatabase repository, IDirectoryManager inputOutputManager) : base(input, data, judge, repository, inputOutputManager) { }
+        [Inject]
+        private IDatabase repository;
+        
+        public OrderAndTakeCommand(string input, string[] data) : base(input, data) { }
 
         private void TryParseParametersForOrderAndTake(string takeCommand, string takeQuantity, string courseName, string comparison)
         {
@@ -13,7 +18,7 @@
             {
                 if (takeQuantity == "all")
                 {
-                    this.Repository.OrderAndTake(courseName, comparison, null);
+                    this.repository.OrderAndTake(courseName, comparison, null);
                 }
                 else
                 {
@@ -21,7 +26,7 @@
                     var hasParsed = int.TryParse(takeQuantity, out studentsToTake);
                     if (hasParsed)
                     {
-                        this.Repository.OrderAndTake(courseName, comparison, studentsToTake);
+                        this.repository.OrderAndTake(courseName, comparison, studentsToTake);
                     }
                     else
                     {

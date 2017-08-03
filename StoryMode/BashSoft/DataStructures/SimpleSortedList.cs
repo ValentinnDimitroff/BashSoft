@@ -3,12 +3,11 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Text;
     using Contracts;
 
-    public class SimpleSortedList<T> : ISimpleOrderedBag<T> where T : IComparable<T>
+    public class SimpleSortedList<T> : ISimpleOrderedBag<T> 
+        where T : IComparable<T>
     {
         private const int DefaultSize = 16;
 
@@ -20,6 +19,7 @@
             : this (Comparer<T>.Create((x, y) => x.CompareTo(y)), DefaultSize)
         {
         }
+
         public SimpleSortedList(int capacity)
             : this(Comparer<T>.Create((x,y) => x.CompareTo(y)), capacity)
         {
@@ -46,18 +46,22 @@
             this.innerCollection = new T[capacity];
         }
 
-        public int Size
-        {
-            get => this.size;
-        }
+        public int Capacity => this.innerCollection.Length;
+
+        public int Size => this.size;
 
         public void Add(T element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             if (this.innerCollection.Length == this.Size)
             {
                 this.Resize();
             }
-
+            
             this.innerCollection[this.Size] = element;
             this.size++;
             Array.Sort(this.innerCollection, 0, this.size, this.comparison);
@@ -86,6 +90,35 @@
             Array.Sort(this.innerCollection, 0, this.size, this.comparison);
         }
 
+        public bool Remove(T element)
+        {
+            bool hasBeenRemoved = false;
+            int indexOfRemovedElement = 0;
+
+            for (int i = 0; i < this.Size; i++)
+            {
+                if (this.innerCollection[i].Equals(element))
+                {
+                    indexOfRemovedElement = i;
+                    this.innerCollection[i] = default(T);
+                    hasBeenRemoved = true;
+                    break;
+                }
+            }
+
+            if (hasBeenRemoved)
+            {
+                for (int i = indexOfRemovedElement; i < this.Size - 1; i++)
+                {
+                    this.innerCollection[i] = this.innerCollection[i + 1];
+                }
+
+                this.innerCollection[this.size - 1] = default(T);
+            }
+
+            return hasBeenRemoved;
+        }
+
         private void MultiResize(ICollection<T> collection)
         {
             int newSize = this.innerCollection.Length * 2;
@@ -99,7 +132,6 @@
             this.innerCollection = newCollection;
         }
 
-
         public string JoinWith(string joiner)
         {
             StringBuilder builder = new StringBuilder();
@@ -108,7 +140,7 @@
                 builder.Append(element).Append(joiner);
             }
 
-            builder.Remove(builder.Length - 1, 1);
+            builder.Remove(builder.Length - joiner.Length, joiner.Length);
             return builder.ToString();
         }
 
@@ -120,9 +152,6 @@
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }
