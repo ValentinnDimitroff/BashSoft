@@ -1,0 +1,15 @@
+cdRel ..
+cdRel ..
+cdRel resources
+readDb dataNew.txt
+display courses ascendign
+display courses ascending
+display courses
+display students descending
+
+show C#_Feb_2015
+show C#_Feb_2015 TimothyPope91_9831
+dropdb
+show C#_Feb_2015
+cmp C:\dataOld.txt C:\dataNew.txt
+cdAbs C:\
